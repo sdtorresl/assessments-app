@@ -1,0 +1,23 @@
+version: '2.0'
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+    volumes:
+      - .:/app
+    environment:
+      - MONGO_URL=mongodb://assessmentsapp_mongo_1:27017/assessments
+    links:
+      - mongo
+
+  mongo:
+    image: mongo
+    ports: 
+      - "27170:27017"
+    volumes:
+      - ./db:/data/initial
+      - mongodata:/data/db
+
+volumes:
+    mongodata:
